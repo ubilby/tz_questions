@@ -1,7 +1,19 @@
 from flask import Flask, request, jsonify, Response
+from flask_sqlalchemy import SQLAlchemy
 from typing import Dict, Any
 
 app = Flask(__name__)
+app.config.from_object("controller.config.Config")
+db = SQLAlchemy(app)
+
+
+class Question(db.Model):
+    __tablename__ = "questions"
+    id = db.Column(db.Integer, primary_key=True)
+    web_id = db.Column(db.Integer)
+    question_text = db.Column(db.String(1023))
+    answer = db.Column(db.String(255))
+    publication_date = db.Column(db.Date)
 
 
 @app.route('/', methods=['POST'])
