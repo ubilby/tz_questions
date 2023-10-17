@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, Response
-from flask_sqlalchemy import SQLAlchemy
 from typing import Dict, Any, List
 
 from .utils import get_answer, get_empty_question, get_used_ids, get_questions
