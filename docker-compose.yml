@@ -1,21 +1,24 @@
 version: '3.6'
 
 services:
-  backend:
-    build: ./services/backend
-    command: python manage.py run -h 0.0.0.0
-    volumes:
-      - ./services/backend/:/usr/src/app/
-    ports:
-      - 5001:5000
-    env_file:
-      - ./.env
   db:
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env  
+
+  backend:
+    build: ./services/backend
+    command: sh -c "python manage.py create_db && python manage.py run -h 0.0.0.0"
+    volumes:
+      - ./services/backend/:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
