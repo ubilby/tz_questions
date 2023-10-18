@@ -62,9 +62,10 @@ def get_questions(number: int, used_ids: set[int]) -> list[Question]:
             answer.append(question)
         else:
             another_raw_question: list[dict[str, Any]] = get_raw_data(1)
-            while not check_id(another_raw_question[0]['id'], used_ids):
+            id: int = another_raw_question[0]['id']
+            while not check_id(id, used_ids):
                 another_raw_question = get_raw_data(1)
-            question: Question = get_question(another_raw_question)
+            question: Question = get_question(another_raw_question[0])
             answer.append(question)
 
     return answer
