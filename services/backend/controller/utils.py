@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any
+from typing import Any, Tuple
 
 from flask import jsonify, Response
 from flask_sqlalchemy import SQLAlchemy
@@ -9,7 +9,7 @@ from .models import Question
 
 
 def get_used_ids(db: SQLAlchemy) -> set[int]:
-    raws_ids: tuple[int, ] = db.session.query(
+    raws_ids: Tuple[int, ] = db.session.query(
         Question.web_id
     ).distinct().all()
     used_ids: set[int] = set(raws_id[0] for raws_id in raws_ids)

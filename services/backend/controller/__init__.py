@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify, Response
-from typing import Dict, Any, List
+from flask import jsonify, Flask,  Response, request
+from typing import Any, Dict, List
 
-from .utils import get_answer, get_empty_question, get_used_ids, get_questions
+from .utils import get_answer, get_empty_question, get_questions, get_used_ids
 from .models import db, Question
 
 
